@@ -15,7 +15,6 @@ def is_visible(x, y, grid) -> bool:
     len([i for i in range(y + 1, len(grid)) if grid[i][x] >= height]),
   ]
 
-  # print(f'[{x},{y} - {height}] -> {hiding_trees}')
   return len([x for x in hiding_trees if x == 0]) > 0
 
 def count_visible_trees(trees, height):
@@ -40,12 +39,14 @@ def determine_scenic_score(x, y, grid) -> int:
 
   return scores[0] * scores[1] * scores[2] * scores[3]
 
-if __name__ == '__main__':
+def main(report_result):
   grid = [x for x in read_input().split('\n') if x != '']
 
-  y = 0
   number_of_visible_trees = sum([sum([is_visible(x, y, grid) for x in range(len(grid))]) for y in range(len(grid))])
-  print(f'Number of visible trees: {number_of_visible_trees}')
+  report_result('Number of visible trees:', number_of_visible_trees)
 
   scores = [[determine_scenic_score(x, y, grid) for x in range(len(grid))] for y in range(len(grid))]
-  print(f'Highest score: {max([max(x) for x in scores])}')
+  report_result('Highest score:', max([max(x) for x in scores]))
+
+if __name__ == '__main__':
+  main(print)

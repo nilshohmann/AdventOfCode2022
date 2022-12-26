@@ -114,4 +114,4 @@ As you do, a very young Elf - one you recognize from the expedition team - appro
 
 Only 49 stars to go.
 
-If you like, you can start the blender.
+**If you like, you can start the blender.**

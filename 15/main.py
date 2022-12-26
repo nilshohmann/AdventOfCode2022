@@ -31,24 +31,6 @@ class SensorData:
     return self.__str__()
 
 def read_input() -> str:
-  """Sensor at x=2, y=18: closest beacon is at x=-2, y=15
-Sensor at x=9, y=16: closest beacon is at x=10, y=16
-Sensor at x=13, y=2: closest beacon is at x=15, y=3
-Sensor at x=12, y=14: closest beacon is at x=10, y=16
-Sensor at x=10, y=20: closest beacon is at x=10, y=16
-Sensor at x=14, y=17: closest beacon is at x=10, y=16
-Sensor at x=8, y=7: closest beacon is at x=2, y=10
-Sensor at x=2, y=0: closest beacon is at x=2, y=10
-Sensor at x=0, y=11: closest beacon is at x=2, y=10
-Sensor at x=20, y=14: closest beacon is at x=25, y=17
-Sensor at x=17, y=20: closest beacon is at x=21, y=22
-Sensor at x=16, y=7: closest beacon is at x=15, y=3
-Sensor at x=14, y=3: closest beacon is at x=15, y=3
-Sensor at x=20, y=1: closest beacon is at x=15, y=3
-"""
-  """Sensor at x=2557568, y=3759110: closest beacon is at x=2594124, y=3746832
-Sensor at x=2684200, y=1861612: closest beacon is at x=2816974, y=2000000
-"""
   with open('input.txt') as file:
     return file.read()
 
@@ -89,12 +71,15 @@ def find_tuning_frequency(data, m):
 
   return possible_signals[0][0] * m + possible_signals[0][1]
 
-if __name__ == '__main__':
+def main(report_result):
   data = [SensorData(x) for x in read_input().split('\n') if x != '']
 
   target_y = 2000000
   positions_without_beacon = positions_without_beacon_at(data, target_y)
-  print(f'Positions without beacon at {target_y}: {positions_without_beacon}')
+  report_result(f'Positions without beacon at {target_y}:', positions_without_beacon)
 
   tuning_signal = find_tuning_frequency(data, 4000000)
-  print(f'Tuning signal: {tuning_signal}')
+  report_result('Tuning signal:', tuning_signal)
+
+if __name__ == '__main__':
+  main(print)

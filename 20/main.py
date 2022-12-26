@@ -28,20 +28,23 @@ def mix_list(data, count = 1):
       item[1] = new_i
       mixed_list.insert(new_i, item)
 
-  return [n for n, i in mixed_list]
+  return [n for n, _ in mixed_list]
 
 def find_coordinates(data: list):
   start_index = data.index(0)
   return [data[(start_index + i) % len(data)] for i in [1000, 2000, 3000]]
 
-if __name__ == '__main__':
+def main(report_result):
   data = [int(x) for x in read_input().split('\n') if x != '']
 
   coordinates = find_coordinates(mix_list(data))
-  print(f'Sum of coordinates: {sum(coordinates)}')
+  report_result('Sum of coordinates:', sum(coordinates))
 
   decryption_key = 811589153
   data = [n * decryption_key for n in data]
 
   coordinates = find_coordinates(mix_list(data, 10))
-  print(f'Sum of coordinates after 10 rounds: {sum(coordinates)}')
+  report_result('Sum of coordinates after 10 rounds:', sum(coordinates))
+
+if __name__ == '__main__':
+  main(print)

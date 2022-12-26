@@ -53,7 +53,6 @@ def move_elfes(elfes_map, count, start = 0) -> bool:
       return i
     i += 1
 
-
 def get_bounds(elfes_map):
   start = list(list(elfes_map.keys())[0])
   end = list(start)
@@ -85,7 +84,7 @@ def count_empty_tiles(elfes_map):
 
   return sum([sum([(0 if elfes_map[(x + start[0], y + start[1])] else 1) for x in range(w)]) for y in range(h)])
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
 
   elfes_map = mapdict()
@@ -95,7 +94,10 @@ if __name__ == '__main__':
         elfes_map[(x,y)] = True
 
   move_elfes(elfes_map, 10)
-  print(f'Empty tiles after 10 rounds: {count_empty_tiles(elfes_map)}')
+  report_result('Empty tiles after 10 rounds:', count_empty_tiles(elfes_map))
 
   total_moves = move_elfes(elfes_map, 10e5, 10)
-  print(f'First moves without changes: {total_moves + 1}')
+  report_result('First moves without changes:', total_moves + 1)
+
+if __name__ == '__main__':
+  main(print)

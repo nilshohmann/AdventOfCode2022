@@ -83,18 +83,20 @@ def find_relevant_dirs(dir: Dir, is_relevant: int):
 
   return result
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
 
   root = parse_structure(data)
 
   relevant_dirs = find_relevant_dirs(root, lambda x : x <= 100000)
-  print(f'Size of relevant dirs with duplicates: {sum([d.size() for d in relevant_dirs])}')
+  report_result('Size of relevant dirs with duplicates:', sum([d.size() for d in relevant_dirs]))
 
   maximium_allowed_space = 70000000 - 30000000
   minimum_size_to_be_removed = root.size() - maximium_allowed_space
-  print(minimum_size_to_be_removed)
 
   relevant_dirs = find_relevant_dirs(root, lambda x : x >= minimum_size_to_be_removed)
   size_of_relevant_dir_with_smallest_size = sorted([d.size() for d in relevant_dirs])[0]
-  print(f'Size of smallest dir to be removed: {size_of_relevant_dir_with_smallest_size}')
+  report_result('Size of smallest dir to be removed:', size_of_relevant_dir_with_smallest_size)
+
+if __name__ == '__main__':
+  main(print)

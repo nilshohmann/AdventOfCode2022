@@ -43,9 +43,14 @@ def determine_priority_for_group(data):
 
   return priority_for_item(common_items.pop())
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
 
-  print(f'Sum of priorities by rucksack: {sum([determine_priority_for_rucksack(split_in_half(x)) for x in data])}')
+  priorities = sum([determine_priority_for_rucksack(split_in_half(x)) for x in data])
+  report_result('Sum of priorities by rucksack:', priorities)
 
-  print(f'Sum of priorities by group: {sum([determine_priority_for_group(x) for x in split_into_groups(data)])}')
+  priorities = sum([determine_priority_for_group(x) for x in split_into_groups(data)])
+  report_result('Sum of priorities by group:', priorities)
+
+if __name__ == '__main__':
+  main(print)

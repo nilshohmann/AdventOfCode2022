@@ -88,11 +88,11 @@ def join_lists(lists):
     result = result + x
   return result
 
-if __name__ == '__main__':
+def main(report_result):
   data = [parse_pair(x) for x in read_input().split('\n\n') if x != '']
 
   relevant_indices = [(i + 1 if is_in_correct_order(x[0], x[1]) else 0) for i, x in enumerate(data)]
-  print(f'Sum of indices: {sum(relevant_indices)}')
+  report_result('Sum of indices:', sum(relevant_indices))
 
   divider_packets = [
     [[2]],
@@ -102,4 +102,7 @@ if __name__ == '__main__':
   ordered_packets = bubble_sort(data, lambda left, right : is_in_correct_order(left, right))
 
   dividers = [i + 1 for i, x in enumerate(ordered_packets) if x in divider_packets]
-  print(f'Decoder key: {dividers[0] * dividers[1]}')
+  report_result('Decoder key:', dividers[0] * dividers[1])
+
+if __name__ == '__main__':
+  main(print)

@@ -45,9 +45,8 @@ def adjust_tail(tail, head):
 
   return tail
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
-  # print(input)
 
   head = [0,0]
   tail = [0,0]
@@ -59,20 +58,19 @@ if __name__ == '__main__':
       tail = adjust_tail(tail, head)
       positions.add(tail)
 
-  print(f'Number of fields visited by tail: {len(positions.positions)}')
+  report_result('Number of fields visited by tail:', len(positions.positions))
 
   knots = [[0,0] for i in range(10)]
   positions = Positions()
 
   for x in data:
     for action in convert_command(x):
-      #print(knots)
-      #print(action)
-
       knots[0] = move(knots[0], action)
       for i in range(1, len(knots)):
         knots[i] = adjust_tail(knots[i], knots[i - 1])
-        # print(knots[i])
       positions.add(knots[-1])
 
-  print(f'Number of fields visited by last knot: {len(positions.positions)}')
+  report_result('Number of fields visited by last knot:', len(positions.positions))
+
+if __name__ == '__main__':
+  main(print)

@@ -86,7 +86,6 @@ class Map:
     for _ in range(r):
       np = (self.size - np[1] - 1, np[0])
 
-    # input()
     return (t[0] * self.size + np[0], t[1] * self.size + np[1], (n[2] + r) % 4)
 
   def __move(self, l):
@@ -118,14 +117,16 @@ def find_password_for_map(map: Map, instructions: list):
   column, row, direction = map.position
   return 1000 * (row + 1) + 4 * (column + 1) + direction
 
-if __name__ == '__main__':
+def main(report_result):
   map, instructions = [x for x in read_input().split('\n\n') if x != '']
   map = Map(map)
   instructions = re.findall("[0-9]+|[LR]", instructions)
 
-  print(f'Final password: {find_password_for_map(map, instructions)}')
+  report_result('Final password:', find_password_for_map(map, instructions))
 
-  # Expected 37415
   map.build_cube_map()
   map.reset_position()
-  print(f'Final password with cube: {find_password_for_map(map, instructions)}')
+  report_result('Final password with cube:', find_password_for_map(map, instructions))
+
+if __name__ == '__main__':
+  main(print)

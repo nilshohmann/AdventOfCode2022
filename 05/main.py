@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import re, sys
+import re
 
 item_reges = re.compile('^\[([A-Z])\]$')
 command_regex = re.compile('^move ([0-9]+) from ([1-9]) to ([1-9])$')
@@ -45,7 +45,7 @@ def parse_lines(data):
 
   return lines
 
-if __name__ == '__main__':
+def main(report_result):
   initial_state, commands = [x for x in read_input().split('\n\n') if x != '']
   commands = [[int(i) for i in command_regex.match(x).groups()] for x in commands.split('\n') if x != '']
 
@@ -55,7 +55,8 @@ if __name__ == '__main__':
     for item in poped_items:
       lines[t - 1].push(item)
 
-  print('Final crate identifier with CrateMover 9000: ' + ''.join([x.pop() for x in lines]))
+  identifier = ''.join([x.pop() for x in lines])
+  report_result('Final crate identifier with CrateMover 9000:', identifier)
 
   lines = parse_lines(initial_state)
   for c, f, t in commands:
@@ -63,4 +64,8 @@ if __name__ == '__main__':
     for item in reversed(poped_items):
       lines[t - 1].push(item)
 
-  print('Final crate identifier with CrateMover 9001: ' + ''.join([x.pop() for x in lines]))
+  identifier = ''.join([x.pop() for x in lines])
+  report_result('Final crate identifier with CrateMover 9001:', identifier)
+
+if __name__ == '__main__':
+  main(print)

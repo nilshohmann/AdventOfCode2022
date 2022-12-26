@@ -62,4 +62,4 @@ So, in this example, the number of overlapping assignment pairs is `4`.
 
 **In how many assignment pairs do the ranges overlap?**
 
-Your puzzle answer was `779.
+Your puzzle answer was `779`.

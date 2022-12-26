@@ -37,8 +37,14 @@ def has_overlap(data):
 
   return is_overlapping
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
 
-  print(f'Number of sections contained in the other: {len([x for x in data if has_complete_overlap(x)])}')
-  print(f'Number of sections overlapping: {len([x for x in data if has_overlap(x)])}')
+  count = len([x for x in data if has_complete_overlap(x)])
+  report_result('Number of sections contained in the other:', count)
+
+  count = len([x for x in data if has_overlap(x)])
+  report_result('Number of sections overlapping:', count)
+
+if __name__ == '__main__':
+  main(print)

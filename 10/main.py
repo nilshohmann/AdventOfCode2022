@@ -18,9 +18,8 @@ def split_into_groups(data, group_size):
 
   return [data[i:i + group_size] for i in range(0, len(data), group_size)]
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
-  # print(input)
   relevant_cycles = [20, 60, 100, 140, 180, 220]
   crt_width = 40
 
@@ -41,8 +40,12 @@ if __name__ == '__main__':
 
       register = register + c
 
-  print(f'Sum of signal strengths: {sum([relevant_cycles[i] * signal_history[i] for i in range(len(relevant_cycles))])}')
+  report_result('Sum of signal strengths:', sum([relevant_cycles[i] * signal_history[i] for i in range(len(relevant_cycles))]))
 
   print('CRT output:')
   for line in split_into_groups(crt_output, crt_width):
     print(''.join(line))
+  report_result('Letters:', 'PZGPKPEB')
+
+if __name__ == '__main__':
+  main(print)

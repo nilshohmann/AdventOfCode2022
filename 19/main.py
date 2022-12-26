@@ -49,9 +49,6 @@ def add(t1, t2):
   return tuple([t1[i] + t2[i] for i in range(len(t1))])
 
 def read_input() -> str:
-  """Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.
-Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian.
-"""
   with open('input.txt') as file:
     return file.read()
 
@@ -77,11 +74,14 @@ def find_maximum_geodes(blueprint: Blueprint, total_time):
   best_state = sorted(states, key = lambda x : x[1][-1])[-1]
   return best_state[1][-1]
 
-if __name__ == '__main__':
+def main(report_result):
   blueprints = [Blueprint(x) for x in read_input().split('\n') if x != '']
 
   total_quality_level = sum([b.id * find_maximum_geodes(b, 24) for b in blueprints])
-  print(f'Total quality level in 24 minutes: {total_quality_level}')
+  report_result('Total quality level in 24 minutes:', total_quality_level)
 
   max_geodes = [find_maximum_geodes(b, 32) for b in blueprints[:3]]
-  print(f'Product for max geodes in 32 minutes: {max_geodes[0] * max_geodes[1] * max_geodes[2]}')
+  report_result('Product for max geodes in 32 minutes:', max_geodes[0] * max_geodes[1] * max_geodes[2])
+
+if __name__ == '__main__':
+  main(print)

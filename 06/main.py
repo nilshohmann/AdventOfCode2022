@@ -17,8 +17,11 @@ def index_for_first_marker(data, threshold) -> int:
     if len(last_characters) == len(set(last_characters)) == threshold:
       return index
 
-if __name__ == '__main__':
+def main(report_result):
   data = read_input()
 
-  print(f'Start of packet: {index_for_first_marker(data, 4)}')
-  print(f'Start of message: {index_for_first_marker(data, 14)}')
+  report_result('Start of packet:', index_for_first_marker(data, 4))
+  report_result('Start of message:', index_for_first_marker(data, 14))
+
+if __name__ == '__main__':
+  main(print)

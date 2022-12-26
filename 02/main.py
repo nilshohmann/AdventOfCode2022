@@ -28,7 +28,6 @@ def determine_score_for_round_part_1(input) -> int:
   myself = point_map[input[1]]
 
   score = ((myself - opponent) + 4) % 3
-  # print(f'{input[0]} - {input[1]} -> {score} ({myself - opponent})')
 
   return myself + score * 3
 
@@ -43,11 +42,14 @@ def determine_score_for_round_part_2(input) -> int:
 
   return myself + (win_loose + 1) * 3
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x.rsplit() for x in read_input().split('\n') if x != '']
 
   total_score_1 = sum([determine_score_for_round_part_1(x) for x in data])
-  print(f'Score for part 1: {total_score_1}')
+  report_result('Score for part 1:', total_score_1)
 
   total_score_2 = sum([determine_score_for_round_part_2(x) for x in data])
-  print(f'Score for part 2: {total_score_2}')
+  report_result('Score for part 2:', total_score_2)
+
+if __name__ == '__main__':
+  main(print)

@@ -116,9 +116,8 @@ What are the indices of the pairs that are already in the right order? (The firs
 
 Your puzzle answer was `6656`.
 
-The first half of this puzzle is complete! It provides one gold star: *
+## Part Two
 
---- Part Two ---
 Now, you just need to put all of the packets in the right order. Disregard the blank lines in your list of received packets.
 
 The distress signal protocol also requires that you include two additional divider packets:

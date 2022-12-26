@@ -103,8 +103,6 @@ def find_shortest_route_length(map: Map):
   next_positions = []
 
   while len(positions_to_check) > 0:
-    # print(f'{iteration} - {positions_to_check}')
-
     for p in positions_to_check:
       visited_positions.append(p)
       if p == map.end:
@@ -146,9 +144,12 @@ def find_shortest_route_length_reverse(map: Map):
 
   return -1
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
 
   map = Map(data)
-  print(F'Shortest route length: {find_shortest_route_length(map)}')
-  print(F'Shortest reverse route length: {find_shortest_route_length_reverse(map)}')
+  report_result('Shortest route length:', find_shortest_route_length(map))
+  report_result('Shortest reverse route length:', find_shortest_route_length_reverse(map))
+
+if __name__ == '__main__':
+  main(print)

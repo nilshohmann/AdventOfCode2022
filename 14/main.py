@@ -111,19 +111,22 @@ def line(start, end):
 
   return points
 
-if __name__ == '__main__':
+def main(report_result):
   rocks = [parse(x) for x in read_input().split('\n') if x != '']
 
   grid = Grid(rocks)
 
   number_of_sand_grains = 0
   while grid.next_sand():
-    number_of_sand_grains = number_of_sand_grains + 1
-  print(f'Number of sand grains: {number_of_sand_grains}')
+    number_of_sand_grains += 1
+  report_result('Number of sand grains:', number_of_sand_grains)
 
   grid = Grid(rocks, True)
 
   number_of_sand_grains = 0
   while grid.next_sand():
-    number_of_sand_grains = number_of_sand_grains + 1
-  print(f'Number of sand grains with floor: {number_of_sand_grains}')
+    number_of_sand_grains += 1
+  report_result('Number of sand grains with floor:', number_of_sand_grains)
+
+if __name__ == '__main__':
+  main(print)

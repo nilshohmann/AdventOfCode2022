@@ -77,19 +77,19 @@ def parse_monkey(data):
   test = Test(int(divider), int(on_true), int(on_false))
   return Monkey(id, items, Operation(operation), test)
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n\n') if x != '']
 
   monkeys = [parse_monkey(x) for x in data]
 
-  for i in range(20):
+  for _ in range(20):
     for m in monkeys:
       while m.has_items():
         next_id, item = m.process_next_item(lambda x : x // 3)
         monkeys[next_id].items.append(item)
 
   activity = list(reversed(sorted([m.inspected_items for m in monkeys])))
-  print(f'Monkey business after 20 rounds: {activity[0] * activity[1]}')
+  report_result('Monkey business after 20 rounds:', activity[0] * activity[1])
 
   monkeys = [parse_monkey(x) for x in data]
 
@@ -97,11 +97,14 @@ if __name__ == '__main__':
   for m in monkeys:
     common_divider = common_divider * m.test.divider
 
-  for i in range(10000):
+  for _ in range(10000):
     for m in monkeys:
       while m.has_items():
         next_id, item = m.process_next_item(lambda x : x % common_divider)
         monkeys[next_id].items.append(item)
 
   activity = list(reversed(sorted([m.inspected_items for m in monkeys])))
-  print(f'New monkey business after 10000 rounds: {activity[0] * activity[1]}')
+  report_result('New monkey business after 10000 rounds:', activity[0] * activity[1])
+
+if __name__ == '__main__':
+  main(print)

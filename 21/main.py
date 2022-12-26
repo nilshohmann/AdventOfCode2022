@@ -86,12 +86,14 @@ def find_result_for_humn(monkeys: dict[str, Monkey]):
       return i
   return -1
 
-if __name__ == '__main__':
+def main(report_result):
   monkeys = [Monkey(x) for x in read_input().split('\n') if x != '']
 
-  md = {m.name: m for m in monkeys}
-  print(f'Root yells: {find_answer_for_root(md)}')
+  monkey_dict = {m.name: m for m in monkeys}
+  report_result('Root yells:', find_answer_for_root(monkey_dict))
 
-  result_for_humn = find_result_for_humn(md)
-  print(f'Result for humn: {result_for_humn}')
-  
+  result_for_humn = find_result_for_humn(monkey_dict)
+  report_result('Result for humn:', result_for_humn)
+
+if __name__ == '__main__':
+  main(print)

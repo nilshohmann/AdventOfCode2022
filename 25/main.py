@@ -2,20 +2,6 @@
 # -*- coding: utf-8 -*-
 
 def read_input() -> str:
-  """1=-0-2
-12111
-2=0=
-21
-2=01
-111
-20012
-112
-1=-1=
-1-12
-12
-1=
-122
-"""
   with open('input.txt') as file:
     return file.read()
 
@@ -61,9 +47,11 @@ def decimal_to_snafu(value: int) -> str:
 
   return ''.join(reversed([mapping[x] for x in result]))
 
-
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
 
   needed_fuel = sum([snafu_to_decimal(d) for d in data])
-  print(f'Needed fuel in snafu: {decimal_to_snafu(needed_fuel)}')
+  report_result('Needed fuel in snafu:', decimal_to_snafu(needed_fuel))
+
+if __name__ == '__main__':
+  main(print)

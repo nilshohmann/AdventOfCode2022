@@ -48,24 +48,15 @@ sprites = [Sprite(x) for x in """####
 ##""".split('\n\n')]
 
 def read_input() -> str:
-  # return """>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>"""
   with open('input.txt') as file:
     return file.read()
 
-"""def highest_point(field):
-  for i in reversed(range(len(field))):
-    if field[i] != empty_line:
-      return i
-  return -1"""
-
 def process_wind(w: int, sprite: Sprite, x: int) -> int:
-  # print(f'process_wind({wind}, {x}, {sprite})')
   if x + w < 0 or x + w + sprite.width > 7:
     return x
   return x + w
 
 def can_move_down(sprite: Sprite, x: int, y: int, field: list[str]) -> bool:
-  # print(f'can_move_down({x}, {y}, {sprite})')
   for i in range(sprite.height):
     if len(field) < y + i:
       continue
@@ -75,7 +66,6 @@ def can_move_down(sprite: Sprite, x: int, y: int, field: list[str]) -> bool:
   return True
 
 def can_move_sideways(w: int, sprite: Sprite, x: int, y: int, field: list[str]) -> bool:
-  # print(f'can_move_sideways({x}, {y}, {w}, {sprite})')
   if x + w < 0 or x + w + sprite.width > 7:
     return False
 
@@ -89,7 +79,6 @@ def can_move_sideways(w: int, sprite: Sprite, x: int, y: int, field: list[str]) 
   return True
 
 def place_sprite(sprite: Sprite, field: list[str], x: int, y: int) -> list[str]:
-  # print(f'place_sprite({x}, {y}, {sprite})')
   while len(field) < y + sprite.height:
     field.append(empty_line)
 
@@ -98,7 +87,6 @@ def place_sprite(sprite: Sprite, field: list[str], x: int, y: int) -> list[str]:
   return field
 
 def has_repeating_pattern(matches):
-  print(f'has_repeating_pattern({matches})')
   return find_repeating_pattern(matches) is not None
 
 def find_repeating_pattern(matches):
@@ -168,14 +156,14 @@ def process_stones(winds, count):
 
   return height_start + height_repetition + height_end - 1
 
-
-if __name__ == '__main__':
+def main(report_result):
   winds = [({'>': 1, '<': -1}[x]) for x in read_input().strip()]
 
   height = process_stones(winds, 2022)
-  print(f'Field height after 2022 stones: {height}')
+  report_result('Field height after 2022 stones:', height)
 
   height = process_stones(winds, 1000000000000)
-  print(f'Field height after 1000000000000 stones: {height}')
+  report_result('Field height after 1000000000000 stones:', height)
 
-  # 1127
+if __name__ == '__main__':
+  main(print)

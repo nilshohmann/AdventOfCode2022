@@ -78,13 +78,6 @@ class Map:
     return f'Map({self.w}x{self.h}, {self.start} -> {self.target})'
 
 def read_input() -> str:
-  """#.######
-#>>.<^<#
-#.<..<<#
-#>v.><>#
-#<^v^^>#
-######.#
-"""
   with open('input.txt') as file:
     return file.read()
 
@@ -95,8 +88,6 @@ def find_shortest_path(map: Map, i = 1):
   states = [(map.start, map.distance_to_target(map.start))]
 
   while len(states) > 0:
-    # print(i, len(states))
-    #input()
     new_states = set()
   
     for p, _ in states:
@@ -108,18 +99,18 @@ def find_shortest_path(map: Map, i = 1):
     states = sorted(new_states, key = lambda x : x[1])[:42]
     i += 1
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
   map = Map(data)
 
   shortest_path = find_shortest_path(map)
-  print(f'Shortest path one way: {shortest_path}')
+  report_result('Shortest path one way:', shortest_path)
 
   map.switch_start_and_target()
   shortest_path = find_shortest_path(map, shortest_path)
-  print(f'Shortest path forth and back: {shortest_path}')
-
   map.switch_start_and_target()
   shortest_path = find_shortest_path(map, shortest_path)
-  print(f'Shortest path forth and back and forth: {shortest_path}')
+  report_result('Shortest path forth and back and forth:', shortest_path)
 
+if __name__ == '__main__':
+  main(print)

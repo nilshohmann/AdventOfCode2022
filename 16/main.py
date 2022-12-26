@@ -116,12 +116,15 @@ def find_max_release_together(vulcano: Vulcano, is_elefant = False, open_valves:
 
   return valve.flow_rate * remaining_time + max_sub_release
 
-if __name__ == '__main__':
+def main(report_result):
   data = [x for x in read_input().split('\n') if x != '']
   vulcano = Vulcano(data)
 
   max_release_alone = find_max_release_alone(vulcano)
-  print(f'Maximum release alone: {max_release_alone}')
+  report_result('Maximum release alone:', max_release_alone)
 
   max_release_together = find_max_release_together(vulcano)
-  print(f'Maximum release together: {max_release_together}')
+  report_result('Maximum release together:', max_release_together)
+
+if __name__ == '__main__':
+  main(print)

@@ -84,7 +84,7 @@ def find_air_bubbles(cubes: CubeData, candidates: list):
         current_candidates.append(t)
 
     if len(current_bubble) > 0:
-      bubbles.append(sorted(current_bubble, key = test))
+      bubbles.append(sorted(current_bubble))
 
   return bubbles
 
@@ -104,18 +104,16 @@ def surface_of(cubes):
 
   return total_surface
 
-def test(p):
-  x,y,z = p[0] if isinstance(p, list) else p
-  return x * 10000 + y * 100 + z
-
-if __name__ == '__main__':
+def main(report_result):
   cubes = CubeData(read_input())
 
   total_surface = surface_of(cubes)
-  print(f'Total surface: {total_surface}')
+  report_result('Total surface:', total_surface)
 
   air_bubbles = cubes.find_air_bubbles()
   air_bubble_surface = surface_of(air_bubbles)
 
-  # Expected > 988
-  print(f'Total surface without air bubbles: {total_surface - air_bubble_surface}')
+  report_result('Total surface without air bubbles:', total_surface - air_bubble_surface)
+
+if __name__ == '__main__':
+  main(print)

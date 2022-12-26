@@ -9,9 +9,12 @@ def sum_data(data: str) -> int:
   elf_data = [int(x) for x in data.rstrip().split('\n')]
   return sum(elf_data)
 
-if __name__ == '__main__':
+def main(report_result):
   data = read_input()
   elfes_sorted = sorted([sum_data(x) for x in data.split('\n\n')])
-  print(f'Elf with highest: {elfes_sorted[-1]}')
+  report_result('Elf with highest:', elfes_sorted[-1])
 
-  print(f'Elfes with highest: {elfes_sorted[-3:]} - sum: {sum(elfes_sorted[-3:])}')
+  report_result(f'Elfes with highest: {elfes_sorted[-3:]} - sum:', sum(elfes_sorted[-3:]))
+
+if __name__ == '__main__':
+  main(print)
